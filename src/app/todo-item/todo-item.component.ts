@@ -6,8 +6,16 @@ import { TodoItem } from '../interfaces/todo-item';
   selector: 'app-todo-item',
   template: `
   <div class="todo-item">
-    {{ item.title }}
+   <div>
+  <input type="checkbox"
+         class="todo-checkbox"
+         (click)="completeItem()"
+         [checked]="item.completed"/>
 
+  <span class="todo-title" [ngClass]="{'todo-complete': item.completed}">
+  {{ item.title }}
+</span>
+</div>
     <button class="btn btn-red" (click)="removeItem()">
       remove
     </button>
@@ -16,13 +24,20 @@ import { TodoItem } from '../interfaces/todo-item';
   styleUrls: ['./todo-item.component.scss']
 })
 export class TodoItemComponent implements OnInit {
-  @Input() item: TodoItem;
-@Output() remove: EventEmitter<TodoItem> = new EventEmitter<TodoItem>();
-  constructor() { }
-
   ngOnInit(): void {
   }
-removeItem(): void {
-  this.remove.emit(this.item);
-}
+  @Input() item: TodoItem;
+  @Output() remove: EventEmitter<TodoItem> = new EventEmitter<TodoItem>();
+  @Output() update: EventEmitter<any> = new EventEmitter<any>();
+  removeItem(): void {
+    this.remove.emit(this.item);
+  }
+  // put this method below ngOnInit
+  completeItem(): void {
+    this.update.emit({
+      item: this.item,
+      changes: { completed: !this.item.completed }
+    });
+
+  }
 }
