@@ -4,8 +4,14 @@
   font-family: 'Lucida Grande', Verdana, sans-serif;
   line-height: 20px;
   border: solid 1px #dddddd;
-  border-radius: 5px;
+  border-radius: 8px 0 0 8px;
   flex-grow: 1;
+}
+.btn-save{
+  border: none;
+  background-color: orange;
+  border-radius: 0 8px 8px 0;
+  width: 100px;
 }
 
 :host(:not([hidden])) {

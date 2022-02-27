@@ -10,7 +10,7 @@ import { Component, OnInit, Output, EventEmitter} from '@angular/core';
        [value]="title"
        (keyup.enter)="submitValue($event.target.value)">
 
-  <button (click)="submitValue(inputElementRef.value)">
+  <button class="btn-save" (click)="submitValue(inputElementRef.value)">
     Save
   </button>
 `,
